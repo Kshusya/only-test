@@ -4,6 +4,8 @@ import "swiper/css";
 import { Navigation, FreeMode } from "swiper";
 import "swiper/css/navigation";
 import "swiper/css/free-mode";
+import data from "../data"
+import { EventsList } from "./EventsList";
 
 export interface HistoryProps
 {
@@ -12,18 +14,32 @@ export interface HistoryProps
 
 interface HistoryState
 {
+    currentTheme: number
 }
 
 export class History extends Component<HistoryProps, HistoryState>
 {
-    prevButtonRef: React.MutableRefObject<null>;
-    nextButtonRef: React.MutableRefObject<null>;
-
     constructor(props: HistoryProps) {
         super(props)
 
-        this.prevButtonRef = React.createRef();
-        this.nextButtonRef = React.createRef();
+        this.state = {
+            currentTheme: 0
+        }
+    }
+
+    prevThemeAvailable = (): boolean => this.state.currentTheme > 0
+    nextThemeAvailable = (): boolean => this.state.currentTheme < data.length - 1
+
+    prevTheme = () => {
+        this.setState(prev => {
+            return { currentTheme: prev.currentTheme - 1 }
+        })
+    }
+
+    nextTheme = () => {
+        this.setState(prev => {
+            return { currentTheme: prev.currentTheme + 1 }
+        })
     }
       
     public render(): JSX.Element
@@ -43,45 +59,28 @@ export class History extends Component<HistoryProps, HistoryState>
                         </div>
                     </div>
                     <div className="wrapper">
-                        <div className="swiper">
-                            06/06
-                            <div>+</div>
-                            <div>-</div>
-                        </div>
-                        <div className="position-relative">
-                            <Swiper
-                                spaceBetween={80}
-                                slidesPerView={3}
-                                navigation={{
-                                    prevEl: this.prevButtonRef.current,
-                                    nextEl: this.nextButtonRef.current
-                                }}
-                                freeMode={true}
-                                modules={[Navigation, FreeMode]}
-                                onInit={() =>
-                                    this.setState(prev => {return {...prev}})
+                        <div>
+                            <div className="slides-count">
+                                {
+                                    (this.state.currentTheme + 1).toString().padStart(2, "0")
+                                }/{
+                                    data.length.toString().padStart(2, "0")
                                 }
-                            >
-                                <SwiperSlide className="card">
-                                    <div className="card__year">2015</div>
-                                    <div className="card__info">13 сентября — частное солнечное затмение, видимое в Южной Африке и части Антарктиды</div>
-                                </SwiperSlide>
-                                <SwiperSlide className="card">
-                                    <div className="card__year">2016</div>
-                                    <div className="card__info">Телескоп «Хаббл» обнаружил самую удалённую из всех обнаруженных галактик, получившую обозначение GN-z11</div>
-                                </SwiperSlide>
-                                <SwiperSlide className="card">
-                                    <div className="card__year">2017</div>
-                                    <div className="card__info">Компания Tesla официально представила первый в мире электрический грузовик Tesla Semi</div>
-                                </SwiperSlide>
-                                <SwiperSlide className="card">
-                                    <div className="card__year">2018</div>
-                                    <div className="card__info">Компания Tesla все еще не выпустила электрический грузовик Tesla Semi</div>
-                                </SwiperSlide>
-                            </Swiper>
-                            <button className="button-prev" ref={this.prevButtonRef}></button>
-                            <button className="button-next" ref={this.nextButtonRef}></button>
+                            </div>
+                            <div className="theme-buttons">
+                                <button
+                                    className="theme-buttons__prev"
+                                    disabled={!this.prevThemeAvailable()}
+                                    onClick={this.prevTheme}></button>
+                                <button
+                                    className="theme-buttons__next"
+                                    disabled={!this.nextThemeAvailable()}
+                                    onClick={this.nextTheme}></button>
+                            </div>
                         </div>
+                        <EventsList
+                            events={data[this.state.currentTheme].events}
+                         />
                     </div>
                 </div>
             </div>

@@ -141,6 +141,7 @@ html,body
     letter-spacing: -0.02em;
     color: $pink;
 }
+
 .swiper {
         &-button {
             &-disabled {
@@ -149,39 +150,100 @@ html,body
         }
 }
 
-.button {
-    &-prev {
-        position: absolute;
-        right: calc(100% + 15px);
-        top: 50%;
-        width: 40px;
-        height: 40px;
+.theme-buttons {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+    margin-bottom: 56px;
+    &__prev {
+        cursor: pointer;
+        display: block;
+        width: 50px;
+        height: 50px;
+        border: 1px solid rgba(66, 86, 122, .5);
         border-radius: 50%;
-        border: none;
-        background-color: $white;
-        box-shadow: 0px 0px 15px rgba(56, 119, 238, 0.1);
-        background-image: url('../images/arrow2.svg');
+        background-image: url('../images/arrow1.svg');
         background-repeat: no-repeat;
-        background-size: 10px;
-        background-position: 55% center;
-        transform: scaleX(-1);
+        background-size: 12.5px;
+        background-position: 45% center;
+        // transform: translateY(-50%);
+        &:disabled {
+            border: 1px solid rgba(66, 86, 122, 0.5);
+            background-image: url('../images/arrow1.svg');
+            opacity: .5;
+            background-repeat: no-repeat;
+            background-size: 12.5px;
+            background-position: 45% center;
+            // transform: translateY(-50%);
+        }
     }
-    &-next {
-        position: absolute;
-        left: calc(100% + 10px);
-        top: 50%;
-        transform: translateY(-50%);
-
-        width: 40px;
-        height: 40px;
+    &__next {
+        cursor: pointer;
+        display: block;
+        width: 50px;
+        height: 50px;
+        border: 1px solid rgba(66, 86, 122, .5);
         border-radius: 50%;
-        border: none;
-        background-color: $white;
-        box-shadow: 0px 0px 15px rgba(56, 119, 238, 0.1);
-        background-image: url('../images/arrow2.svg');
+        background-image: url('../images/arrow1.svg');
         background-repeat: no-repeat;
-        background-size: 10px;
-        background-position: 55% center;
+        background-size: 12.5px;
+        background-position: 45% center;
+        transform: scaleX(-1);
+        &:disabled {
+            border: 1px solid rgba(66, 86, 122, 0.5);
+            background-image: url('../images/arrow1.svg');
+            opacity: .5;
+            background-repeat: no-repeat;
+            background-size: 12.5px;
+            background-position: 45% center;
+            transform: scaleX(-1);
+        }
+    }
+}
+
+.slides-count {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.carousel {
+    &__button {
+        &-prev {
+            cursor: pointer;
+            position: absolute;
+            right: calc(100% + 15px);
+            top: 50%;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background-color: $white;
+            box-shadow: 0px 0px 15px rgba(56, 119, 238, 0.1);
+            background-image: url('../images/arrow2.svg');
+            background-repeat: no-repeat;
+            background-size: 10px;
+            background-position: 55% center;
+            transform: translateY(-50%) scaleX(-1);
+        }
+        &-next {
+            cursor: pointer;
+            position: absolute;
+            left: calc(100% + 10px);
+            top: 50%;
+            transform: translateY(-50%);
+
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background-color: $white;
+            box-shadow: 0px 0px 15px rgba(56, 119, 238, 0.1);
+            background-image: url('../images/arrow2.svg');
+            background-repeat: no-repeat;
+            background-size: 10px;
+            background-position: 55% center;
+        }
     }
 }
 
