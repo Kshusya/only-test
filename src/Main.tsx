@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { App } from "./App";
-import { Hello } from "./components/Hello";
+import { History } from "./components/History";
 
 export interface MainProps
 {
@@ -21,13 +21,8 @@ export class Main extends Component<MainProps, MainState>
     public render(): JSX.Element
     {
         return (
-            <Hello message="React TypeScript Webpack Starter">
-                <div className="features">
-                    <div>Webpack 5 + HMR</div>
-                    <div>TypeScript + React</div>
-                    <div>SCSS + Autoprefixing</div>
-                </div>
-            </Hello>
+            <History>
+            </History>
         );
     }
 }

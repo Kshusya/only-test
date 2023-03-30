@@ -21,7 +21,7 @@ module.exports = (env, options) =>
                     exclude: /node_modules/,
                 },
                 {
-                    test: /\.scss$/,
+                    test: /\.(s)?css$/,
                     use: [
                         // We're in dev and want HMR, SCSS is handled in JS
                         // In production, we want our css as files
@@ -49,6 +49,7 @@ module.exports = (env, options) =>
                         name: "[path][name].[ext]",
                         context: path.resolve(__dirname, "src/assets"),
                         emitFile: false,
+                        esModule: false
                     },
                 },
                 {
@@ -61,6 +62,7 @@ module.exports = (env, options) =>
                         context: path.resolve(__dirname, "src/assets"),
                         name: "[path][name].[ext]",
                         emitFile: false,
+                        esModule: false
                     },
                 },
             ],

@@ -19,7 +19,7 @@ module.exports = (env, options) =>
                     exclude: /node_modules/,
                 },
                 {
-                    test: /\.scss$/,
+                    test: /\.(s)?css$/,
                     use: [
                         MiniCssExtractPlugin.loader,
                         "css-loader",
@@ -45,6 +45,7 @@ module.exports = (env, options) =>
                         name: "[path][name].[ext]",
                         context: path.resolve(__dirname, "src/assets"),
                         emitFile: false,
+                        esModule: false
                     },
                 },
                 {
@@ -57,6 +58,7 @@ module.exports = (env, options) =>
                         context: path.resolve(__dirname, "src/assets"),
                         name: "[path][name].[ext]",
                         emitFile: false,
+                        esModule: false
                     },
                 },
             ],
