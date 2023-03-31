@@ -1,5 +1,5 @@
-🚀 Getting Started:
+🚀 Как запустить проект:
 
-1. Clone the project
-2. Run `npm install`
-3. Run `npm run dev`
+1. Клонировать репозиторий
+2. Запустить `npm install`
+3. Запустить `npm run dev`

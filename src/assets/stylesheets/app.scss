@@ -186,7 +186,7 @@ html,body
             border: 1px solid rgba(48, 62, 88, .5);
             border-radius: 50%;
 
-            transition: width 0.4s ease-in, height 0.4s ease-in, left 0.4s ease-in, top 0.4s ease-in, background-color 0.4s ease-in;
+            transition: width 0.25s ease-in, height 0.25s ease-in, left 0.25s ease-in, top 0.25s ease-in, background-color 0.25s ease-in;
         }
     
         &:hover::before, &.active::before {
@@ -228,7 +228,7 @@ html,body
     gap: 15%;
     font-weight: 700;
     font-size: 10rem;
-    line-height: 8rem;
+    line-height: 10rem;
     letter-spacing: -0.02em;
 
     @media only screen and (max-width: 767px) {
@@ -238,13 +238,14 @@ html,body
 
     @media only screen and (min-width: 768px) and (max-width: 1080px) {
         font-size: 8rem;
+        line-height: 8rem;
     }
 
-    :first-child {
+    > :first-child {
         color: $fiolet;
     }
 
-    :last-child {
+    > :last-child {
         color: $pink;
     }
 
