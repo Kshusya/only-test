@@ -21,8 +21,9 @@ export class Main extends Component<MainProps, MainState>
     public render(): JSX.Element
     {
         return (
-            <History>
-            </History>
+            <>
+                <History/>
+            </>
         );
     }
 }

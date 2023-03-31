@@ -44,43 +44,72 @@ export class History extends Component<HistoryProps, HistoryState>
       
     public render(): JSX.Element
     {
+        let spaceBetweenCrosshairItems = 360 / data.length
+        let currentThemeObj = data[this.state.currentTheme]
+        
         return (
             <div>
-                <div className="container">
+                <div className="container container-crosshair">
                     <h1 className="headline">
                         Исторические<br/>даты
                     </h1>
                     <div className="crosshair">
                         <div className="crosshair__circle">
-                            <div className="date-holder">
-                                <span className="start-date">2015</span>
-                                <span className="end-date">2021</span>
-                            </div>
+                            {data.map((theme, i) => <div
+                                key={i}
+                                className="crosshair__element"
+                                style={{ '--deg': `${(i - (this.state.currentTheme + 1)) * spaceBetweenCrosshairItems}deg` } as React.CSSProperties}>
+                                <button onClick={() => {
+                                    this.setState({currentTheme: i})
+                                }} className={`crosshair__dot ${this.state.currentTheme === i ? "active": ""}`}>
+                                    <a className="crosshair__number">
+                                        {theme.id}
+                                    </a>
+                                    <span className="crosshair__title">
+                                        {theme.title}
+                                    </span>
+                                </button>
+                            </div>)}
+                        </div>
+                        <div className="date-holder">
+                            <span>{currentThemeObj.events[0].year}</span>
+                            <span>{currentThemeObj.events.at(-1)!.year}</span>
                         </div>
                     </div>
                     <div className="wrapper">
-                        <div>
-                            <div className="slides-count">
-                                {
-                                    (this.state.currentTheme + 1).toString().padStart(2, "0")
-                                }/{
-                                    data.length.toString().padStart(2, "0")
-                                }
+                        
+                        <EventsList
+                            themeId={this.state.currentTheme}
+                            events={currentThemeObj.events}
+                        />
+                        <div className="navigation">
+                            <div>
+                                <div className="slides-count">
+                                    {
+                                        (this.state.currentTheme + 1).toString().padStart(2, "0")
+                                    }/{
+                                        data.length.toString().padStart(2, "0")
+                                    }
+                                </div>
+                                <div className="theme-buttons">
+                                    <button
+                                        className="theme-buttons__prev"
+                                        disabled={!this.prevThemeAvailable()}
+                                        onClick={this.prevTheme}></button>
+                                    <button
+                                        className="theme-buttons__next"
+                                        disabled={!this.nextThemeAvailable()}
+                                        onClick={this.nextTheme}></button>
+                                </div>
                             </div>
-                            <div className="theme-buttons">
-                                <button
-                                    className="theme-buttons__prev"
-                                    disabled={!this.prevThemeAvailable()}
-                                    onClick={this.prevTheme}></button>
-                                <button
-                                    className="theme-buttons__next"
-                                    disabled={!this.nextThemeAvailable()}
-                                    onClick={this.nextTheme}></button>
+                            <div className="pagination-block">
+                                {data.map((theme, i) => 
+                                    <button 
+                                    onClick={() => this.setState({currentTheme: i})}
+                                    className={`pagination ${this.state.currentTheme === i ? "active": ""}`}
+                                    ></button>)}
                             </div>
                         </div>
-                        <EventsList
-                            events={data[this.state.currentTheme].events}
-                         />
                     </div>
                 </div>
             </div>
